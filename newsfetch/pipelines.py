@@ -12,12 +12,12 @@ from datetime import datetime
 
 class NewsfetchPipeline(object):
     def open_spider(self, spider):
-        hostname = 'piro.ceubekalawiz.us-east-2.rds.amazonaws.com'  # host
-        username = 'piro'  # username
-        password = 'research123'  # your password
-        database = 'piro'  # database name
+        hostname = ''  # host
+        username = ''  # username
+        password = ''  # your password
+        database = ''  # database name
         self.client = pymongo.MongoClient(
-            "mongodb://fouthpillar:pillar@cluster0-shard-00-00-lv2tm.mongodb.net:27017,cluster0-shard-00-01-lv2tm.mongodb.net:27017,cluster0-shard-00-02-lv2tm.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true")
+            "mongodb://fouthpillar:<Password>@cluster0-shard-00-00-lv2tm.mongodb.net:27017,cluster0-shard-00-01-lv2tm.mongodb.net:27017,cluster0-shard-00-02-lv2tm.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true")
 
         self.connection = psycopg2.connect(
             host=hostname, user=username, password=password, dbname=database)
@@ -30,9 +30,9 @@ class NewsfetchPipeline(object):
 
     def process_item(self, item, spider):
         if spider.name == 'republic':
-            # self.cur.execute(
-            #     "insert into feed_republic(headline,link) values(%s,%s)", (item['headline'], item['link']))
-            # self.connection.commit()
+            self.cur.execute("insert into feed_republic(headline,link,date) values(%s,%s,%s)", (
+                item['headline'], item['link'], datetime.today().strftime("%Y-%m-%d")))
+            self.connection.commit()
             with self.client:
                 db = self.client['newsdb']
                 collection = db['feed_republic']
@@ -44,9 +44,9 @@ class NewsfetchPipeline(object):
             return item
 
         if spider.name == 'ndtv':
-            # self.cur.execute(
-            #     "insert into feed_ndtv(headline,link) values(%s,%s)", (item['headline'], item['link']))
-            # self.connection.commit()
+            self.cur.execute("insert into feed_ndtv(headline,link,date) values(%s,%s,%s)", (
+                item['headline'], item['link'], datetime.today().strftime("%Y-%m-%d")))
+            self.connection.commit()
             with self.client:
                 db = self.client['newsdb']
                 collection = db['feed_ndtv']
@@ -58,9 +58,9 @@ class NewsfetchPipeline(object):
             return item
 
         if spider.name == 'indiatv':
-            # self.cur.execute(
-            #     "insert into feed_indiatv(headline,link) values(%s,%s)", (item['headline'], item['link']))
-            # self.connection.commit()
+            self.cur.execute("insert into feed_indiatv(headline,link,date) values(%s,%s,%s)", (
+                item['headline'], item['link'], datetime.today().strftime("%Y-%m-%d")))
+            self.connection.commit()
             with self.client:
                 db = self.client['newsdb']
                 collection = db['feed_indiatv']
@@ -72,9 +72,9 @@ class NewsfetchPipeline(object):
             return item
 
         if spider.name == 'thehindu':
-            # self.cur.execute(
-            #     "insert into feed_thehindu(headline,link) values(%s,%s)", (item['headline'], item['link']))
-            # self.connection.commit()
+            self.cur.execute("insert into feed_thehindu(headline,link,date) values(%s,%s,%s)", (
+                item['headline'], item['link'], datetime.today().strftime("%Y-%m-%d")))
+            self.connection.commit()
             with self.client:
                 db = self.client['newsdb']
                 collection = db['feed_thehindu']
@@ -86,9 +86,9 @@ class NewsfetchPipeline(object):
             return item
 
         if spider.name == 'zee':
-            # self.cur.execute(
-            #     "insert into feed_zeenews(headline,link) values(%s,%s)", (item['headline'], item['link']))
-            # self.connection.commit()
+            self.cur.execute("insert into feed_zeenews(headline,link,date) values(%s,%s,%s)", (
+                item['headline'], item['link'], datetime.today().strftime("%Y-%m-%d")))
+            self.connection.commit()
             with self.client:
                 db = self.client['newsdb']
                 collection = db['feed_zeenews']
@@ -100,9 +100,9 @@ class NewsfetchPipeline(object):
             return item
 
         if spider.name == 'indianexpress':
-            # self.cur.execute(
-            #     "insert into feed_zeenews(headline,link) values(%s,%s)", (item['headline'], item['link']))
-            # self.connection.commit()
+            self.cur.execute("insert into feed_indianexpress(headline,link,date) values(%s,%s,%s)",
+                             (item['headline'], item['link'], datetime.today().strftime("%Y-%m-%d")))
+            self.connection.commit()
             with self.client:
                 db = self.client['newsdb']
                 collection = db['feed_indianexpress']
@@ -114,9 +114,9 @@ class NewsfetchPipeline(object):
             return item
 
         if spider.name == 'news18':
-            # self.cur.execute(
-            #     "insert into feed_zeenews(headline,link) values(%s,%s)", (item['headline'], item['link']))
-            # self.connection.commit()
+            self.cur.execute("insert into feed_news18(headline,link,date) values(%s,%s,%s)", (
+                item['headline'], item['link'], datetime.today().strftime("%Y-%m-%d")))
+            self.connection.commit()
             with self.client:
                 db = self.client['newsdb']
                 collection = db['feed_news18']
@@ -128,9 +128,9 @@ class NewsfetchPipeline(object):
             return item
 
         if spider.name == 'oneindia':
-            # self.cur.execute(
-            #     "insert into feed_zeenews(headline,link) values(%s,%s)", (item['headline'], item['link']))
-            # self.connection.commit()
+            self.cur.execute("insert into feed_oneindia(headline,link,date) values(%s,%s,%s)", (
+                item['headline'], item['link'], datetime.today().strftime("%Y-%m-%d")))
+            self.connection.commit()
             with self.client:
                 db = self.client['newsdb']
                 collection = db['feed_oneindia']
@@ -142,9 +142,9 @@ class NewsfetchPipeline(object):
             return item
 
         if spider.name == 'firstpost':
-            # self.cur.execute(
-            #     "insert into feed_zeenews(headline,link) values(%s,%s)", (item['headline'], item['link']))
-            # self.connection.commit()
+            self.cur.execute("insert into feed_firstpost(headline,link,date) values(%s,%s,%s)", (
+                item['headline'], item['link'], datetime.today().strftime("%Y-%m-%d")))
+            self.connection.commit()
             with self.client:
                 db = self.client['newsdb']
                 collection = db['feed_firstpost']
@@ -156,9 +156,9 @@ class NewsfetchPipeline(object):
             return item
 
         if spider.name == 'dna':
-            # self.cur.execute(
-            #     "insert into feed_zeenews(headline,link) values(%s,%s)", (item['headline'], item['link']))
-            # self.connection.commit()
+            self.cur.execute("insert into feed_dna(headline,link,date) values(%s,%s,%s)", (
+                item['headline'], item['link'], datetime.today().strftime('%Y-%m-%d')))
+            self.connection.commit()
             with self.client:
                 db = self.client['newsdb']
                 collection = db['feed_dna']
