@@ -7,10 +7,10 @@ class NewsfetchItem(scrapy.Item):
     link = scrapy.Field()
 
 
-class ZeeSpider(scrapy.Spider):
-    name = "zee"
-    allowed_domains = ["http://zeenews.india.com/"]
-    start_urls = ['http://zeenews.india.com//']
+class IndianexpressSpider(scrapy.Spider):
+    name = "indianexpress"
+    allowed_domains = ["https://indianexpress.com/"]
+    start_urls = ['https://indianexpress.com//']
 
     def parse(self, response):
         list = []
@@ -20,97 +20,84 @@ class ZeeSpider(scrapy.Spider):
         list4 = (response.xpath('//h4/a[@href]'))
         list5 = (response.xpath('//h5/a[@href]'))
         list6 = (response.xpath('//h6/a[@href]'))
-        list7 = (response.xpath('//ul[@class="sports-home-one"]/li/a[@href]'))
+
         try:
             for li in list1:
                 headline = li.xpath('.//text()').extract_first()
                 href = li.xpath('.//@href').extract_first()
-                href = 'https://zeenews.india.com' + href
 
                 if type(headline) is str and headline not in list:
                     if (len(headline) > 20):
                         list.append(headline)
-                        zeeitem = NewsfetchItem(headline=headline, link=href)
-                        yield zeeitem
+                        indianexpressitem = NewsfetchItem(
+                            headline=headline, link=href)
+                        yield indianexpressitem
                         # print(headline.encode('utf-8'))
                         # print(href)
-                        print("\n\n")
+                        # print("\n\n")
             for li in list2:
                 headline = li.xpath('.//text()').extract_first()
                 href = li.xpath('.//@href').extract_first()
-                href = 'https://zeenews.india.com' + href
 
                 if type(headline) is str and headline not in list:
                     if (len(headline) > 20):
                         list.append(headline)
-                        zeeitem = NewsfetchItem(headline=headline, link=href)
-                        yield zeeitem
-                        # print(headline)
+                        indianexpressitem = NewsfetchItem(
+                            headline=headline, link=href)
+                        yield indianexpressitem
+                        # print(headline.encode('utf-8'))
                         # print(href)
-                        print("\n\n")
+                        # print("\n\n")
 
             for li in list3:
                 headline = li.xpath('.//text()').extract_first()
                 href = li.xpath('.//@href').extract_first()
-                href = 'https://zeenews.india.com' + href
 
                 if type(headline) is str and headline not in list:
                     if (len(headline) > 20):
                         list.append(headline)
-                        zeeitem = NewsfetchItem(headline=headline, link=href)
-                        yield zeeitem
+                        indianexpressitem = NewsfetchItem(
+                            headline=headline, link=href)
+                        yield indianexpressitem
                         # print(headline.encode('utf-8'))
                         # print(href)
                         # print("\n\n")
             for li in list4:
                 headline = li.xpath('.//text()').extract_first()
                 href = li.xpath('.//@href').extract_first()
-                href = 'https://zeenews.india.com' + href
 
                 if type(headline) is str and headline not in list:
                     if (len(headline) > 20):
                         list.append(headline)
-                        zeeitem = NewsfetchItem(headline=headline, link=href)
-                        yield zeeitem
+                        indianexpressitem = NewsfetchItem(
+                            headline=headline, link=href)
+                        yield indianexpressitem
                         # print(headline.encode('utf-8'))
                         # print(href)
                         # print("\n\n")
             for li in list5:
                 headline = li.xpath('.//text()').extract_first()
                 href = li.xpath('.//@href').extract_first()
-                href = 'https://zeenews.india.com' + href
 
                 if type(headline) is str and headline not in list:
                     if (len(headline) > 20):
                         list.append(headline)
-                        zeeitem = NewsfetchItem(headline=headline, link=href)
-                        yield zeeitem
+                        indianexpressitem = NewsfetchItem(
+                            headline=headline, link=href)
+                        yield indianexpressitem
                         # print(headline.encode('utf-8'))
                         # print(href)
                         # print("\n\n")
             for li in list6:
                 headline = li.xpath('.//text()').extract_first()
                 href = li.xpath('.//@href').extract_first()
-                href = 'https://zeenews.india.com' + href
 
                 if type(headline) is str and headline not in list:
                     if (len(headline) > 20):
                         list.append(headline)
-                        zeeitem = NewsfetchItem(headline=headline, link=href)
-                        yield zeeitem
-                        # print(headline.encode('utf-8'))
-                        # print(href)
-                        # print("\n\n")
-            for li in list7:
-                headline = li.xpath('.//text()').extract_first()
-                href = li.xpath('.//@href').extract_first()
-                href = 'https://zeenews.india.com' + href
-
-                if type(headline) is str and headline not in list:
-                    if (len(headline) > 20):
-                        list.append(headline)
-                        zeeitem = NewsfetchItem(headline=headline, link=href)
-                        yield zeeitem
+                        indianexpressitem = NewsfetchItem(
+                            headline=headline, link=href)
+                        yield indianexpressitem
                         # print(headline.encode('utf-8'))
                         # print(href)
                         # print("\n\n")

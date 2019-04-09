@@ -1,40 +1,59 @@
-from apscheduler.schedulers.blocking import BlockingScheduler
+
 import subprocess
 
-sched = BlockingScheduler()
 
-@sched.scheduled_job('cron', day_of_week='mon-sun', hour=12)
-def timed_job():
-    subprocess.call(['heroku','run','scrapy','crawl','zee'], shell ='true')
+def my_interval_job1():
+    subprocess.call(['scrapy', 'crawl', 'indiatv'])
 
-sched.start()
 
-sched1 = BlockingScheduler()
+def my_interval_job2():
+    subprocess.call(['scrapy', 'crawl', 'ndtv'])
 
-@sched1.scheduled_job('cron', day_of_week='mon-sun', hour=12)
-def timed_job():
-    subprocess.call(['heroku','run','scrapy','crawl','indiatv'], shell ='true')
-sched1.start()
 
-sched2 = BlockingScheduler()
+def my_interval_job3():
+    subprocess.call(['scrapy', 'crawl', 'republic'])
 
-@sched2.scheduled_job('cron', day_of_week='mon-sun', hour=13)
-def timed_job():
-    subprocess.call(['heroku','run','scrapy','crawl','ndtv'], shell ='true')
-sched2.start()
 
-sched3 = BlockingScheduler()
+def my_interval_job4():
+    subprocess.call(['scrapy', 'crawl', 'thehindu'])
 
-@sched3.scheduled_job('cron', day_of_week='mon-sun', hour=14)
-def timed_job():
 
-    subprocess.call(['heroku','run','scrapy','crawl','republic'], shell ='true')
+def my_interval_job5():
+    subprocess.call(['scrapy', 'crawl', 'zee'])
 
-sched3.start()
 
-sched4 = BlockingScheduler()
+def my_interval_job6():
+    subprocess.call(['scrapy', 'crawl', 'indianexpress'])
 
-@sched4.scheduled_job('cron', day_of_week='mon-sun', hour=12)
-def timed_job():
-    subprocess.call(['heroku','run','scrapy','crawl','thehindu'], shell ='true')
-sched4.start()
+
+def my_interval_job7():
+    subprocess.call(['scrapy', 'crawl', 'news18'])
+
+
+def my_interval_job8():
+    subprocess.call(['scrapy', 'crawl', 'firstpost'])
+
+
+def my_interval_job9():
+    subprocess.call(['scrapy', 'crawl', 'oneindia'])
+
+
+def my_interval_job10():
+    subprocess.call(['scrapy', 'crawl', 'dna'])
+
+
+if __name__ == '__main__':
+    from apscheduler.schedulers.blocking import BlockingScheduler
+    sched = BlockingScheduler()
+
+    sched.add_job(my_interval_job1, 'interval', id='indiatv', hours=6)
+    sched.add_job(my_interval_job2, 'interval', id='ndtv',    hours=6)
+    sched.add_job(my_interval_job3, 'interval', id='republic', hours=6)
+    sched.add_job(my_interval_job4, 'interval', id='thehindu', hours=6)
+    sched.add_job(my_interval_job5, 'interval', id='zee',     hours=6)
+    sched.add_job(my_interval_job6, 'interval', id='indainexpress', hours=6)
+    sched.add_job(my_interval_job7, 'interval', id='news18', hours=6)
+    sched.add_job(my_interval_job8, 'interval', id='firstpost', hours=6)
+    sched.add_job(my_interval_job9, 'interval', id='oneindia', hours=12)
+    sched.add_job(my_interval_job10, 'interval', id='dna', hours=6)
+    sched.start()

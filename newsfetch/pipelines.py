@@ -7,6 +7,7 @@
 
 import psycopg2
 import pymongo
+from datetime import datetime
 
 
 class NewsfetchPipeline(object):
@@ -35,7 +36,8 @@ class NewsfetchPipeline(object):
             with self.client:
                 db = self.client['newsdb']
                 collection = db['feed_republic']
-                data = {"headline": item['headline'], "link": item['link']}
+                data = {"headline": item['headline'], "_id": item['link'], "time": datetime.now().strftime(
+                    '%Y-%m-%d %H:%M:%S'), "category": "to be inserted", "sentiment": "Positive-default"}
                 x = collection.insert_one(data)
                 print(x.inserted_id)
 
@@ -48,7 +50,8 @@ class NewsfetchPipeline(object):
             with self.client:
                 db = self.client['newsdb']
                 collection = db['feed_ndtv']
-                data = {"headline": item['headline'], "link": item['link']}
+                data = {"headline": item['headline'], "_id": item['link'], "time": datetime.now().strftime(
+                    '%Y-%m-%d %H:%M:%S'), "category": "to be inserted", "sentiment": "Positive-default"}
                 x = collection.insert_one(data)
                 print(x.inserted_id)
 
@@ -61,7 +64,8 @@ class NewsfetchPipeline(object):
             with self.client:
                 db = self.client['newsdb']
                 collection = db['feed_indiatv']
-                data = {"headline": item['headline'], "link": item['link']}
+                data = {"headline": item['headline'], "_id": item['link'], "time": datetime.now().strftime(
+                    '%Y-%m-%d %H:%M:%S'), "category": "to be inserted", "sentiment": "Positive-default"}
                 x = collection.insert_one(data)
                 print(x.inserted_id)
 
@@ -74,7 +78,8 @@ class NewsfetchPipeline(object):
             with self.client:
                 db = self.client['newsdb']
                 collection = db['feed_thehindu']
-                data = {"headline": item['headline'], "link": item['link']}
+                data = {"headline": item['headline'], "_id": item['link'], "time": datetime.now().strftime(
+                    '%Y-%m-%d %H:%M:%S'), "category": "to be inserted", "sentiment": "Positive-default"}
                 x = collection.insert_one(data)
                 print(x.inserted_id)
 
@@ -87,7 +92,78 @@ class NewsfetchPipeline(object):
             with self.client:
                 db = self.client['newsdb']
                 collection = db['feed_zeenews']
-                data = {"headline": item['headline'], "link": item['link']}
+                data = {"headline": item['headline'], "_id": item['link'], "time": datetime.now().strftime(
+                    '%Y-%m-%d %H:%M:%S'), "category": "to be inserted", "sentiment": "Positive-default"}
+                x = collection.insert_one(data)
+                print(x.inserted_id)
+
+            return item
+
+        if spider.name == 'indianexpress':
+            # self.cur.execute(
+            #     "insert into feed_zeenews(headline,link) values(%s,%s)", (item['headline'], item['link']))
+            # self.connection.commit()
+            with self.client:
+                db = self.client['newsdb']
+                collection = db['feed_indianexpress']
+                data = {"headline": item['headline'], "_id": item['link'], "time": datetime.now().strftime(
+                    '%Y-%m-%d %H:%M:%S'), "category": "to be inserted", "sentiment": "Positive-default"}
+                x = collection.insert_one(data)
+                print(x.inserted_id)
+
+            return item
+
+        if spider.name == 'news18':
+            # self.cur.execute(
+            #     "insert into feed_zeenews(headline,link) values(%s,%s)", (item['headline'], item['link']))
+            # self.connection.commit()
+            with self.client:
+                db = self.client['newsdb']
+                collection = db['feed_news18']
+                data = {"headline": item['headline'], "_id": item['link'], "time": datetime.now().strftime(
+                    '%Y-%m-%d %H:%M:%S'), "category": "to be inserted", "sentiment": "Positive-default"}
+                x = collection.insert_one(data)
+                print(x.inserted_id)
+
+            return item
+
+        if spider.name == 'oneindia':
+            # self.cur.execute(
+            #     "insert into feed_zeenews(headline,link) values(%s,%s)", (item['headline'], item['link']))
+            # self.connection.commit()
+            with self.client:
+                db = self.client['newsdb']
+                collection = db['feed_oneindia']
+                data = {"headline": item['headline'], "_id": item['link'], "time": datetime.now().strftime(
+                    '%Y-%m-%d %H:%M:%S'), "category": "to be inserted", "sentiment": "Positive-default"}
+                x = collection.insert_one(data)
+                print(x.inserted_id)
+
+            return item
+
+        if spider.name == 'firstpost':
+            # self.cur.execute(
+            #     "insert into feed_zeenews(headline,link) values(%s,%s)", (item['headline'], item['link']))
+            # self.connection.commit()
+            with self.client:
+                db = self.client['newsdb']
+                collection = db['feed_firstpost']
+                data = {"headline": item['headline'], "_id": item['link'], "time": datetime.now().strftime(
+                    '%Y-%m-%d %H:%M:%S'), "category": "to be inserted", "sentiment": "Positive-default"}
+                x = collection.insert_one(data)
+                print(x.inserted_id)
+
+            return item
+
+        if spider.name == 'dna':
+            # self.cur.execute(
+            #     "insert into feed_zeenews(headline,link) values(%s,%s)", (item['headline'], item['link']))
+            # self.connection.commit()
+            with self.client:
+                db = self.client['newsdb']
+                collection = db['feed_dna']
+                data = {"headline": item['headline'], "_id": item['link'], "time": datetime.now().strftime(
+                    '%Y-%m-%d %H:%M:%S'), "category": "to be inserted", "sentiment": "Positive-default"}
                 x = collection.insert_one(data)
                 print(x.inserted_id)
 
